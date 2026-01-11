@@ -1,0 +1,39 @@
+- title: "Balos"
+  titleSlug: balos
+  description: "Balos lagoon famous for it’s white sand and turquoise water"
+  image: balos.jpg
+
+- title: "Falassarna"
+  titleSlug: falassarna
+  description: "On the far west end of Crete, with golden sand and crystal clear water"
+  image: falassarna.jpg
+  
+- title: "Elafonissi"
+  titleSlug: elafonisi
+  description: "On the southwest tip of Crete, discover it’s pink sand and deep blue water"
+  image: elafonisi.jpg 
+  
+- title: "Sfakia region"
+  titleSlug: sfakia
+  description: "Combining the roughness of the mountains with the pebble beaches and deep blue water."
+  image: sfakia.jpg
+  
+- title: "Kournas"
+  titleSlug: kournas
+  description: "Visit the largest natural lake of Crete"
+  image: kournas.jpg   
+
+- title: "Aptera"
+  titleSlug: aptera
+  description: "An archaeological site with minoan and roman ruins and majestic views."
+  image: aptera.jpg    
+  
+- title: "Samaria gorge"
+  titleSlug: samaria
+  description: "The longest gorge in Europe, with the unique flora and fauna; hike from  the white mountains to the Libyan sea."
+  image: samaria.jpg
+  
+- title: "Therisso gorge"
+  titleSlug: therisso
+  description: "A beautiful drive through the breathtaking scenery."
+  image: therisso.jpg

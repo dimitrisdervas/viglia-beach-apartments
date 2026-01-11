@@ -1,0 +1,172 @@
+{{ define "main" }}
+<div class="page suggestions">
+    <!-- Map Section with all suggestion locations -->
+    <section class="map-section">
+        <div id="map-canvas" class="map-canvas" style="height: 400px;"></div>
+    </section>
+
+    <!-- Suggestions Content -->
+    <section class="section-suggestions container" style="padding-top: 3rem; padding-bottom: 4rem;">
+        <div class="suggestions-layout" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+            <!-- Main content -->
+            <div class="main-suggestions" style="flex: 3; min-width: 300px;">
+                {{ range .Site.Data.content.suggestions }}
+                <div class="post section scrollspy" id="{{ .titleSlug }}">
+                    <div class="suggestion-title">{{ .title }}</div>
+                    <div class="suggestion-image">
+                        <img src="/images/suggestions/650px/{{ .image }}" srcset="/images/suggestions/650px/{{ .image }} 650w,
+                       /images/suggestions/380px/{{ .image }} 380w,
+                       /images/suggestions/160px/{{ .image }} 160w"
+                            sizes="(max-width: 599px) 100vw, (max-width: 900px) 380px, 650px" alt="{{ .title }}"
+                            loading="lazy">
+                    </div>
+                    <div class="suggestion-description">{{ .description }}</div>
+                </div>
+                {{ end }}
+            </div>
+
+            <!-- Sidebar with links -->
+            <div class="sidebar-suggestions" style="flex: 1; min-width: 200px;">
+                <div class="scrollspy-block"
+                    style="position: sticky; top: 80px; background: #f9f9f9; padding: 1rem; border-radius: 4px;">
+                    <div style="font-weight: 700; color: #4a4a4a; margin-bottom: 1rem;">Places to Visit</div>
+                    {{ range .Site.Data.content.suggestions }}
+                    <div class="title-link" style="margin-bottom: 0.5rem;">
+                        <a href="#{{ .titleSlug }}"
+                            style="color: #8a8a8a; font-size: 0.95rem; transition: color 0.3s;">{{ .title }}</a>
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .page.suggestions {
+        padding-top: 64px;
+    }
+
+    .post.section {
+        margin-bottom: 3rem;
+        scroll-margin-top: 80px;
+    }
+
+    .suggestion-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #4a4a4a;
+        margin-bottom: 0.5rem;
+        text-transform: capitalize;
+    }
+
+    .suggestion-title::after {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 2px;
+        background: #e7ad44;
+        margin-top: 8px;
+    }
+
+    .suggestion-image {
+        margin: 1rem 0;
+        max-width: 650px;
+    }
+
+    .suggestion-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .suggestion-description {
+        font-size: 1rem;
+        color: #8a8a8a;
+        line-height: 1.6;
+    }
+
+    .title-link a:hover {
+        color: #024b79;
+    }
+
+    @media (max-width: 767px) {
+        .sidebar-suggestions {
+            display: none;
+        }
+
+        .suggestion-image {
+            max-width: 100%;
+        }
+
+        .suggestion-title {
+            font-size: 1.25rem;
+        }
+    }
+</style>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMnz5pux1SPWE0DFlrXitKQO1S_8FnXbg"></script>
+<script>
+    (function () {
+        var locations = [
+            [35.514523, 23.943559, "Viglia Beach Apartments", "viglia"],
+            [35.5792671, 23.5887205, "Balos", "balos"],
+            [35.5019631, 23.5799002, "Falassarna", "falassarna"],
+            [35.2695139, 23.5304403, "Elafonisi", "elafonisi"],
+            [35.20209, 24.1089, "Sfakia", "sfakia"],
+            [35.3303832, 24.2761982, "Kournas", "kournas"],
+            [35.46543, 24.14779, "Aptera", "aptera"],
+            [35.2911342, 23.9593437, "Samaria Gorge", "samaria"],
+            [35.4323351, 23.9833843, "Therisso Gorge", "therisso"]
+        ];
+
+        function initSuggestionsMap() {
+            var mapCanvas = document.getElementById('map-canvas');
+            if (!mapCanvas || typeof google === 'undefined') return;
+
+            var mapOptions = {
+                zoom: 9,
+                center: new google.maps.LatLng(35.38, 23.9),
+                styles: [
+                    { featureType: "landscape", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 65 }] },
+                    { featureType: "poi", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }, { lightness: 51 }] },
+                    { featureType: "road.highway", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }] },
+                    { featureType: "water", elementType: "geometry", stylers: [{ hue: "#00b3ff" }, { saturation: -21 }, { lightness: -25 }] }
+                ]
+            };
+
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var infoWindow = new google.maps.InfoWindow({ maxWidth: 200 });
+
+            for (var i = 0; i < locations.length; i++) {
+                var loc = locations[i];
+                var position = new google.maps.LatLng(loc[0], loc[1]);
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: loc[2]
+                });
+
+                (function (marker, loc) {
+                    google.maps.event.addListener(marker, 'click', function () {
+                        if (loc[3]) {
+                            infoWindow.setContent("<div class='map-sugtitle'><a href='#" + loc[3] + "'>" + loc[2] + "</a></div>");
+                        } else {
+                            infoWindow.setContent("<div class='map-sugtitle'>" + loc[2] + "</div>");
+                        }
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, loc);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSuggestionsMap);
+        } else {
+            initSuggestionsMap();
+        }
+    })();
+</script>
+{{ end }}

@@ -1,0 +1,15 @@
+phone: '+30 28220.23893'
+fax: '+30 28220.23893'
+mobile: '+30 6978.11.53.49'
+email: 'vigliahotel@gmail.com'
+gps: '35.512717,23.625015'
+address: 'Metoxi Viglia, Kíssamos, 73400, Greece'
+booking: 
+  url: http://bookitbutton.booking.com/hotel/gr/viglia-beach-apartments.de.html?aid=330843;lang=en
+  score: 9.5
+  base: "/10"
+  title: booking.com
+  message: Superb
+  image: /assets/images/booking-logo.png
+tripadvisor:
+  url: https://www.tripadvisor.com/Hotel_Review-g656571-d644847-Reviews-Viglia_Beach_Apartments-Gramvousa_Chania_Prefecture_Crete.html

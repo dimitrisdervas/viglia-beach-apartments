@@ -1,0 +1,59 @@
+- title: Bus service
+  url: http://www.bus-service-crete.com
+  tag: bus
+- title: Weather Prediction for Chania 24 hours
+  url: http://meteo.chania.teicrete.gr?page_id=836
+  tag: weather
+- title: Chania International Airport
+  tag: airport   
+  url: http://www.chania-airport.com
+- title: Heraklion International Airport Kazantzakis
+  tag: airport   
+  url: http://www.heraklion-airport.info/
+- title: Aegean Airlines
+  tag: airlines 
+  url: https://www.aegeanair.com
+- title: Air France Airlines
+  tag: airlines   
+  url: http://www.airfrance.com
+- title: Alitalia Airlines
+  tag: airlines   
+  url: http://www.alitalia.com
+- title: British Airways
+  tag: airlines  
+  url: http://www.britishairways.com
+- title: Lufthansa Airlines
+  tag: airlines   
+  url: http://www.lufthansa.com
+- title: Daily Cruise to Gramvoussa island and lagoon of Balos
+  url: http://www.gramvousa.com
+- title: Municipality of Chania  Municipality of Chania
+  url: http://www.chania.gr
+  tag: municipality  
+- title: Municipality of Kissamos
+  url: http://www.kissamos.gr
+  tag: municipality
+- title: Limnoupolis Water Park
+  url: http://www.limnoupolis.gr
+- title: Lane Lines
+  url: http://www.lane.gr
+  tag: boats  
+- title: Airtickets.gr
+  url: http://www.airtickets.gr
+- title: Athens International Airport Eleftherios Venizelos
+  url: http://www.aia.gr/traveler
+  tag: airport 
+- title: Olympic Air 
+  url: http://www.olympicair.com
+  tag: airlines
+- title: TUI
+  url: https://www.tui.co.uk/flight/ 
+  tag: airlines
+- title: Ryanair 
+  url: https://www.ryanair.com/ 
+  tag: airlines
+- title: Falassarna Beach party
+  url: http://www.falassarnabeachparty.com
+- title: Blue Star Ferries
+  url: http://www.bluestarferries.gr
+  tag: boats  

@@ -1,0 +1,137 @@
+{{ define "main" }}
+<div class="page gallery">
+    <!-- Outside Photos Section -->
+    <section class="photos-section container" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="photos-strip">
+            <div class="component-header">
+                <div class="component-title">Outside</div>
+            </div>
+            <div class="gallery-grid">
+                {{/* Get all images from assets/images/gallery folder using Hugo Pipes */}}
+                {{ $galleryImages := resources.Match "images/gallery/*" }}
+                {{ range $galleryImages }}
+                {{ $thumbnail := .Resize "250x180 q85" }}
+                {{ $full := .Resize "1200x900 q90" }}
+                <div class="photo">
+                    <a href="{{ $full.RelPermalink }}" target="_blank" class="gallery-link">
+                        <img src="{{ $thumbnail.RelPermalink }}" width="{{ $thumbnail.Width }}"
+                            height="{{ $thumbnail.Height }}" alt="Viglia Beach Apartments" loading="lazy">
+                    </a>
+                </div>
+                {{ else }}
+                <p style="color: #999;">No outside photos found.</p>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Galleries Section - Pull images from room content pages -->
+    <section class="rooms-section container" style="padding-top: 2rem; padding-bottom: 4rem;">
+        <div class="rooms section">
+            {{ $rooms := where site.RegularPages ".Section" "rooms" }}
+            {{ $rooms = where $rooms ".Params.tag" "room" }}
+
+            {{ range $rooms }}
+            {{ $room := . }}
+            {{ if $room.Params.images }}
+            <div class="room-gallery" style="margin-bottom: 3rem;">
+                <div class="room-title">
+                    <a href="{{ $room.RelPermalink }}">{{ $room.Title }}</a>
+                </div>
+                <div class="photos-strip">
+                    <div class="gallery-grid">
+                        {{ range $room.Params.images }}
+                        {{/* Use static images from /images/all/ folder */}}
+                        <div class="gallery-image">
+                            <a href="/images/all/{{ .image }}" target="_blank">
+                                <img src="/images/all/160px/{{ .image }}" alt="{{ $room.Title }}" loading="lazy">
+                            </a>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+            {{ end }}
+        </div>
+    </section>
+</div>
+
+<style>
+    /* Gallery Page Specific Styles */
+    .page.gallery {
+        padding-top: 64px;
+        min-height: calc(100vh - 264px);
+    }
+
+    .gallery-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .photo,
+    .gallery-image {
+        flex: 0 0 calc(25% - 0.5rem);
+        min-width: 150px;
+    }
+
+    @media (max-width: 991px) {
+
+        .photo,
+        .gallery-image {
+            flex: 0 0 calc(33.333% - 0.5rem);
+        }
+    }
+
+    @media (max-width: 600px) {
+
+        .photo,
+        .gallery-image {
+            flex: 0 0 calc(50% - 0.5rem);
+        }
+    }
+
+    .photo img,
+    .gallery-image img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .photo:hover img,
+    .gallery-image:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .room-gallery .room-title {
+        margin-bottom: 1rem;
+    }
+
+    .room-gallery .room-title a {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #4a4a4a;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+    }
+
+    .room-gallery .room-title a::after {
+        content: '';
+        display: block;
+        background: #e7ad44;
+        height: 2px;
+        width: 40px;
+        margin-top: 8px;
+    }
+
+    .room-gallery .room-title a:hover {
+        color: #e7ad44;
+    }
+</style>
+{{ end }}

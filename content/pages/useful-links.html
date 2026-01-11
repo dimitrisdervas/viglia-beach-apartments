@@ -1,0 +1,143 @@
+---
+layout: default
+seoTitle: "Viglia Beach Apartments - Useful Links"
+title: useful-links
+permalink: useful-links
+config:
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+     class: useful-section
+   sectionTitle:
+      title: "Useful Links"
+   divs:
+      - div: 
+         theme:
+          class: useful
+        components:
+          - component: posts-list
+            data:
+               title: Airlines
+               tag: airlines
+               tag-hash: tag
+               class: useful-post
+               content-type: useful-links
+               data-type: data-list
+               groupFieldsElement: 
+                ul:
+                  theme:
+                     class: post
+               fields: 
+                - field: title
+                  data:
+                    link: posts-nohtml
+                    class: title
+      - div: 
+         theme:
+          class: useful
+        components:                    
+          - component: posts-list
+            data:
+               title: Boats
+               tag: boats
+               tag-hash: tag
+               class: useful-post
+               content-type: useful-links
+               data-type: data-list
+               groupFieldsElement: 
+                ul:
+                  theme:
+                     class: post
+               fields: 
+                - field: title
+                  data:
+                    link: posts-nohtml
+                    class: title
+      - div: 
+         theme:
+          class: useful
+        components:                    
+          - component: posts-list
+            data:
+               title: Airports
+               tag: airport
+               tag-hash: tag
+               class: suggestion
+               content-type: useful-links
+               data-type: data-list
+               groupFieldsElement: 
+                ul:
+                  theme:
+                     class: post
+               fields: 
+                - field: title
+                  data:
+                    link: posts-nohtml
+                    class: title
+      - div: 
+         theme:
+          class: useful
+        components:                     
+          - component: posts-list
+            data:
+               title: Municipality
+               tag: municipality
+               tag-hash: tag
+               class: useful-post
+               content-type: useful-links
+               data-type: data-list
+               groupFieldsElement: 
+                ul:
+                  theme:
+                     class: post
+               fields: 
+                - field: title
+                  data:
+                    link: posts-nohtml
+                    class: title
+      - div: 
+         theme:
+          class: useful
+        components:                       
+          - component: posts-list
+            data:
+               title: Bus Services
+               tag: bus
+               tag-hash: tag
+               class: useful-post
+               content-type: useful-links
+               data-type: data-list
+               groupFieldsElement: 
+                ul:
+                  theme:
+                     class: post
+               fields: 
+                - field: title
+                  data:
+                    link: posts-nohtml
+                    class: title
+      - div: 
+         theme:
+          class: useful
+        components:                       
+          - component: posts-list
+            data:
+               title: Weather
+               tag: weather
+               tag-hash: tag
+               class: useful-post
+               content-type: useful-links
+               data-type: data-list
+               groupFieldsElement: 
+                ul:
+                  theme:
+                     class: post
+               fields: 
+                - field: title
+                  data:
+                    link: posts-nohtml
+                    class: title                                                              
+---
+
+{% include basic_components/page.html %}

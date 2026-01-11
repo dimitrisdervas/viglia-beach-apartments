@@ -1,0 +1,84 @@
+---
+layout: gallery
+seoTitle: Viglia Gallery
+title: Gallery
+permalink: gallery
+config:
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: photos-section
+   divs:                                                 
+      - div: 
+          theme:
+           class: photos-strip    
+        components:
+           - component: posts-list
+             data:
+              title: OUTSIDE             
+              content-type: gallery-booking
+              data-type: data-list
+              limit: 5
+              fields:
+                  - field: image
+                    data:
+                       theme: 
+                          class: photo materialboxed
+                       image-hash: image
+                       image-path: /assets/images/viglia-booking/
+           - component: posts-list
+             data:
+              content-type: gallery-outside2019
+              data-type: data-list
+              fields:
+                  - field: image
+                    data:
+                       theme: 
+                          class: photo materialboxed
+                       image-hash: image
+                       image-path: /assets/images/outside2019/
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: rooms-section
+   divs:                    
+      - div: 
+          theme:
+           class: rooms section
+        components:
+           - component: posts-list
+             data:
+              content-type: rooms
+              data-type: collection
+              tag-hash: tag
+              tag: room
+              groupFieldsElement:
+                div:
+                  theme:
+                    class: room-gallery
+              fields:
+                  - field: title
+                    data:
+                      link: posts
+                      class: room-title
+                  - field: group
+                    class: photos-strip 
+                    fields:
+                      - field: scrs-images
+                        data:
+                           theme:
+                              class: gallery-image materialboxed
+                           images-path: /assets/images/all/
+                           images-hash: image
+                           sizes: |
+                              (max-width: 600px) 600px,(min-width: 900px) 900,(min-width: 1200) 1200,(min-width: 1800) 2000
+                           srcset:
+                            - set: 2000
+                            - set: 1200
+                            - set: 900
+                            - set: 600  
+---
+
+{% include basic_components/page.html %}

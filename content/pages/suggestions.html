@@ -1,0 +1,82 @@
+---
+layout: default
+seoTitle: "Viglia Beach Apartments - Suggestions"
+title: suggestions
+permalink: suggestions
+cssClass: bg
+config:
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+     class: map-section
+   divs:
+      - components:
+         - component: gmap
+           data:
+            javascript-plugin: gmap
+            javascript-plugin-data:
+              apiKey: AIzaSyDMnz5pux1SPWE0DFlrXitKQO1S_8FnXbg
+              gmapFilePath: googleMap-suggestions.js
+              id: map-canvas        
+              class: map-canvas
+              height: 450px
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+     class: section-suggestions
+   sectionTitle:
+      title: "Places to Visit"
+   divs:              
+      - div: 
+         theme:
+          class: main-suggestions     
+        components:
+          - component: posts-list
+            data:
+               class: suggestion
+               content-type: suggestions
+               data-type: data-list
+               javascript-plugin: materialize-scrollpsy
+               groupFieldsElement: 
+                div:
+                  theme:
+                     class: post section scrollspy
+                     id: post.titleSlug
+               fields: 
+                - field: title
+                  data:
+                    class: title
+                - field: src-image
+                  data:
+                    image-hash: image
+                    image-path: /assets/images/suggestions/
+                    sizes: |
+                          (max-width: 599px) 160px,(min-width: 600px) 380px,(min-width: 900px) 650px
+                    srcset: 
+                          - set: 160
+                          - set: 380  
+                          - set: 650
+                - field: description
+                  data:
+                    class: description
+      - div: 
+           theme:
+             class: sidebar-suggestions
+        components:
+               - component: posts-list
+                 data:
+                  content-type: suggestions
+                  data-type: data-list
+                  wrapperDiv:
+                   theme:
+                     class: scrollspy-block
+                  fields:
+                       - field: title
+                         data:
+                           class: title-link
+                           link-field: titleSlug
+---
+
+{% include basic_components/page.html %}

@@ -1,0 +1,68 @@
+{{/* Rooms Grid Partial - displays room cards with prices from rates.yml */}}
+{{ $rooms := where site.RegularPages ".Section" "rooms" }}
+{{ $rooms = where $rooms ".Params.tag" "room" }}
+{{ $rates := .Site.Data.content.rates }}
+
+<ul class="rooms-all">
+    {{ range first 3 $rooms }}
+    {{ $page := . }}
+
+    {{/* Get lowest price from rate_keys */}}
+    {{ $lowestPrice := "" }}
+    {{ if $page.Params.rate_keys }}
+    {{ range $page.Params.rate_keys }}
+    {{ $rateKey := . }}
+    {{ $rateEntry := index $rates.prices $rateKey }}
+    {{ if $rateEntry }}
+    {{ range first 1 $rateEntry.prices }}
+    {{ if not $lowestPrice }}
+    {{ $lowestPrice = .price }}
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ end }}
+    {{ end }}
+
+    <li>
+        <div class="room-post z-depth-1">
+            {{/* Main Photo */}}
+            <div class="main-photo">
+                <a href="{{ $page.RelPermalink }}">
+                    {{ with $page.Params.main_photo }}
+                    <img src="/images/all/{{ . }}" srcset="/images/all/380px/{{ . }} 380w,
+                       /images/all/160px/{{ . }} 160w" sizes="(max-width: 767px) 100vw, 33vw" alt="{{ $page.Title }}"
+                        loading="lazy">
+                    {{ else }}
+                    <div
+                        style="width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: #999;">No image</span>
+                    </div>
+                    {{ end }}
+                </a>
+            </div>
+
+            {{/* Room Title */}}
+            <div class="room-title">
+                <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+            </div>
+
+            {{/* Room Details */}}
+            <div class="room-details">
+                {{ with $page.Params.room_size }}<div class="room-size">{{ . }}</div>{{ end }}
+                {{ with $page.Params.room_view }}<div class="room-view">{{ . }}</div>{{ end }}
+            </div>
+
+            {{/* Rates - from rates.yml data file */}}
+            <div class="rates-from">
+                {{ if $lowestPrice }}
+                <span class="field-label">From:</span> {{ $lowestPrice }}
+                {{ end }}
+            </div>
+        </div>
+    </li>
+    {{ else }}
+    <li>
+        <p>No rooms found with tag "room"</p>
+    </li>
+    {{ end }}
+</ul>

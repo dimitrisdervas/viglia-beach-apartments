@@ -1,0 +1,160 @@
+{{ define "main" }}
+<div class="page rates-page">
+    <section class="rates-section container" style="padding-top: 3rem; padding-bottom: 4rem;">
+        {{ $rates := .Site.Data.content.rates }}
+
+        {{ range $season := $rates.seasons }}
+        <div class="seasons-card">
+            <!-- Season Header -->
+            <div class="season-header">
+                <div class="date">{{ $season.date }}</div>
+                <div class="season-type">{{ $season.title }} season</div>
+            </div>
+
+            <!-- Room Prices for this Season -->
+            <div class="season-content">
+                {{ range $key, $rateEntry := $rates.prices }}
+                <div class="room">
+                    <div class="room-title">
+                        <a href="/rooms/{{ $rateEntry.room_slug }}/">{{ $rateEntry.display_name }}</a>
+                    </div>
+                    <div class="price">
+                        {{ range $rateEntry.prices }}
+                        {{ if eq .season $season.title }}{{ .price }}{{ end }}
+                        {{ end }}
+                        <a class="book" href="/rooms/{{ $rateEntry.room_slug }}/#reservation">
+                            Check Availability
+                            <i class="material-icons">send</i>
+                        </a>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+    </section>
+</div>
+
+<style>
+    .page.rates-page {
+        padding-top: 64px;
+    }
+
+    .seasons-card {
+        margin-bottom: 2.5rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+        background: #fff;
+    }
+
+    .season-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .season-header .date {
+        background: #464646;
+        color: #fff;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: 700;
+        font-family: 'Merriweather', serif;
+    }
+
+    .season-header .season-type {
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #4a4a4a;
+        text-transform: lowercase;
+    }
+
+    .season-content {
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 1px solid #eee;
+    }
+
+    .room {
+        flex: 1;
+        min-width: 200px;
+        border-right: 1px solid #eee;
+        padding: 0;
+    }
+
+    .room:last-child {
+        border-right: none;
+    }
+
+    .room-title {
+        padding: 10px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .room-title a {
+        color: #8a8a8a;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    .room-title a:hover {
+        color: #e7ad44;
+    }
+
+    .price {
+        padding: 15px 20px;
+        font-size: 1.75rem;
+        font-weight: 700;
+        font-family: 'Merriweather', serif;
+        color: #e7ad44;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    .price .book {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+        color: #ccc;
+        text-transform: uppercase;
+        transition: color 0.3s;
+    }
+
+    .price .book:hover {
+        color: #4a4a4a;
+    }
+
+    .price .book .material-icons {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 767px) {
+        .season-content {
+            flex-direction: column;
+        }
+
+        .room {
+            border-right: none;
+            border-bottom: 1px solid #eee;
+        }
+
+        .room:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{{ end }}

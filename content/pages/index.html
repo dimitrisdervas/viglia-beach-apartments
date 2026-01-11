@@ -1,0 +1,378 @@
+---
+layout: default
+permalink: index.html
+seoTitle: Viglia 
+title: welcome
+cssClass: frontpage
+config:
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: slideshow-section
+   divs:
+      - div: 
+         theme:
+          class: frontpage-slideshow     
+        components:
+         - component: posts-list
+           data:
+            javascript-plugin: owl-carousel
+            javascript-plugin-data:
+                 items: 1
+                 loop: true
+                 lazyLoad: true
+                 autoplay: true
+                 margin: 10
+                 nav: true
+                 dots: true
+            wrapperDiv:
+             theme:
+                class: owl-carousel owl-theme
+                id: slideshow
+            groupFieldsElement: div
+            groupFieldsElement-data:
+             class: slideshow-item
+            content-type: slideshow
+            data-type: data-list
+            fields:
+              - field: group
+                class: group-item
+                fields:
+                 - field: src-image
+                   data:
+                     theme:
+                        class: slideshow-image
+                     image-hash: image
+                     image-path: /assets/images/slideshow/cropped/
+                     sizes: |
+                        100vw
+                     srcset:
+                      - set: 2000
+                      - set: 1200
+                      - set: 900
+                      - set: 600
+                 - field: group
+                   class: slideshow-title
+                   fields:
+                     - field: title
+                       data:
+                        class: title animated fadeInDown
+                     - field: subtitle
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: aboutus-section content-top
+   divs:
+      - div:
+         theme:
+           class: description aboutus-frontpage
+        components:
+           - component: one-post
+             data:
+               data-type: collection
+               content-type: rooms
+               post-title: 'about us'
+               fields:
+                 - field: text
+                   data:
+                     class: abouts-us
+ - section:
+    data:
+      htmlelement: section
+    theme:
+      class: awards-section
+   divs:
+      - div:
+         theme:
+           class: awards
+        components:
+           - component: custom/booking-award-2017
+           - component: custom/tripadvisor
+           - component: custom/travel-myth
+ - section:
+    data:
+      htmlelement: section
+    theme:
+      class: rooms-section
+   divs:
+      - div:
+          theme:
+           class: rooms section
+        components:
+           - component: posts-list
+             data:
+              title: Our Rooms
+              content-type: rooms
+              data-type: collection
+              tag-hash: tag
+              tag: room
+              groupFieldsElement:
+                ul:
+                  theme:
+                    class: rooms-all
+              fields:
+                - field: group
+                  class: room-post z-depth-1
+                  fields:
+                  - field: src-image
+                    data:
+                       theme: 
+                          class: main-photo
+                       image-hash: main-photo
+                       image-path: /assets/images/all/cropped/
+                       sizes: |
+                          (max-width: 599px) 80vw, 30vw
+                       srcset: 
+                          - set: 380
+                          - set: 160
+                       link: post
+                  - field: title
+                    data:
+                      link: posts
+                      class: room-title
+                  - field: group
+                    class: room-details
+                    fields:
+                      - field: room-size
+                      - field: room-view
+                  - field: rates-from
+                    data:
+                     label: "From:"
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: reviews-section
+   divs:                  
+      - div: 
+          theme:
+           class: reviews  
+        components:
+           - component: posts-list
+             data:
+              title: People Reviews
+              javascript-plugin: owl-carousel
+              javascript-plugin-data:
+                 items: 1
+                 loop: true
+                 lazyLoad: true
+                 autoplay: true
+                 margin: 10
+                 dots: true
+              wrapperDiv:
+               theme:
+                  class: owl-carousel owl-theme
+                  id: slideshow-reviews
+              groupFieldsElement: div
+              groupFieldsElement-data:
+              class: slideshow-item
+              content-type: reviews
+              data-type: data-list
+              limit: 3
+              fields:
+               - field: group
+                 class: review
+                 fields:
+                  - field: text
+                    data:
+                     class: review-text
+                  - field: name
+                  - field: country  
+                  - field: site
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: contact-section
+   divs:
+      - div:
+         theme:
+          class: contact
+        components:
+         - component: form-netlify
+           data:
+            title: Reservation
+            javascript-plugin: form
+            theme:
+              class: contact-form-materialize form
+            fields:
+                 - field: redirect
+                   data:
+                     url: /thankyou.html
+                 - field: input
+                   wrapperDiv:
+                     theme:
+                       class: input-field
+                   data:
+                    id: name
+                    name: name
+                    label: name
+                    class: name validate
+                    type: text
+                    data-parsley-required: true
+                 - field: input
+                   wrapperDiv:
+                     theme:
+                       class: input-field
+                   data:
+                    id : email
+                    name: email
+                    label: email
+                    class: email validate
+                    type: email
+                    data-parsley-required: true
+                 - field: input
+                   wrapperDiv:
+                     theme:
+                       class: input-field
+                   data:
+                     id: phone
+                     name: phone
+                     class: phone validate
+                     type: text
+                     label: phone
+                 - field: date
+                   wrapperDiv:
+                     theme:
+                       class: checkin
+                   data:
+                     id: checkin
+                     name: checkin
+                     label: Checkin
+                     class: datepicker-checkin
+                     data-parsley-required: true
+                 - field: date
+                   wrapperDiv:
+                     theme:
+                       class: checkout
+                   data:
+                     id: checkout
+                     name: checkout
+                     label: Checkout
+                     class: datepicker-checkout
+                     data-parsley-required: true
+                 - field: select
+                   wrapperDiv:
+                     theme:
+                        class: input-field persons
+                   data:
+                     id: persons
+                     name: persons
+                     label: Persons
+                     data-parsley-required: true
+                   options:
+                        - option: Persons
+                          data: disabled selected
+                        - option: 1
+                        - option: 2
+                        - option: 3
+                        - option: 4
+                        - option: 5
+                        - option: 6
+                        - option: 7
+                        - option: 8
+                 - field: select
+                   wrapperDiv:
+                     theme:
+                        class: input-field villa
+                   data:
+                     name: villa-type
+                     id: villa
+                     data-parsley-required: true
+                   options:
+                        - option: Choose Studio
+                          data: disabled selected
+                        - option: Studio
+                        - option: Studio Sea View
+                        - option: Family Apartment
+                 - field: textarea
+                   wrapperDiv:
+                     theme:
+                        class: input-field message
+                   data:
+                    class: materialize-textarea
+                    name: message
+                    type: text
+                    id: textarea
+                    label: message
+                 - field: netlifyRecaptcha
+                   wrapperDiv:
+                     theme:
+                        class: recaptcha
+                 - field: button
+                   wrapperDiv:
+                     theme:
+                        class: button-submit
+                   data:
+                    theme:
+                      class: submit-button btn waves-effect
+                    type: submit
+                    name: action
+                    value: Reservation
+                    button-text: Ask Owner
+         - component: custom/booking-button
+ - section:
+    data:
+      htmlelement: section
+    theme:
+      class: details-section
+   divs:
+      - div:
+          theme:
+           class: details-content
+        components:
+         - component: field
+           data:
+              title: Contact
+              wrapperDiv:
+                theme:
+                   class: contact-details
+              content-type: contact
+              data-type: data-list
+              fields:
+                - field: phone
+                  data:
+                     icon: phone
+                - field: mobile
+                  data:
+                    icon: phonelink_ring
+                - field: email
+                  data:
+                     icon: email
+                - field: address
+                  data:
+                     icon: room         
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: photos-section
+   divs:                                                 
+      - div: 
+          theme:
+           class: photos-strip    
+        components:
+           - component: posts-list
+             data:
+              title: Gallery             
+              content-type: gallery
+              data-type: data-list
+              limit: 5
+              groupFieldsElement:
+                ul:
+                 theme:
+                   class: posts
+              fields:
+                  - field: image
+                    data:
+                       theme: 
+                          class: photo
+                       link: page
+                       path: gallery.html
+                       image-hash: image
+                       image-path: /assets/images/viglia-booking/250px/        
+---
+
+{% include basic_components/page.html %}

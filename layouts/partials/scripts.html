@@ -1,0 +1,339 @@
+<!-- Scripts here -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Slideshow functionality
+    const slides = document.querySelectorAll('.group-item');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.remove('opacity-0');
+          slide.classList.add('opacity-100');
+        } else {
+          slide.classList.remove('opacity-100');
+          slide.classList.add('opacity-0');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    // Auto-play slideshow
+    setInterval(nextSlide, 5000);
+
+    // Event listeners for navigation
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Reviews carousel functionality
+    const reviewDots = document.querySelectorAll('.review-dot');
+    const reviewsContainer = document.querySelector('.reviews-container');
+    let currentReview = 0;
+
+    function showReview(index) {
+      if (reviewsContainer) {
+        reviewsContainer.style.transform = `translateX(-${index * 100}%)`;
+      }
+      reviewDots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('bg-blue-600');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.remove('bg-blue-600');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+    }
+
+    reviewDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentReview = index;
+        showReview(currentReview);
+      });
+    });
+
+    // Auto-play reviews
+    setInterval(() => {
+      currentReview = (currentReview + 1) % reviewDots.length;
+      showReview(currentReview);
+    }, 8000);
+
+    // Form validation
+    const reservationForm = document.getElementById('reservation-form');
+    if (reservationForm) {
+      reservationForm.addEventListener('submit', function (e) {
+        // Basic validation can be added here
+        console.log('Form submitted');
+      });
+    }
+
+    // Lightbox functionality for gallery
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const closeLightbox = document.getElementById('close-lightbox');
+    const prevLightbox = document.getElementById('prev-lightbox');
+    const nextLightbox = document.getElementById('next-lightbox');
+    let currentImageIndex = 0;
+    let galleryImages = [];
+
+    if (lightbox) {
+      // Collect all gallery images
+      document.querySelectorAll('.photo img, .gallery-image img').forEach((img, index) => {
+        galleryImages.push(img.src);
+        img.addEventListener('click', () => {
+          currentImageIndex = index;
+          openLightbox(img.src);
+        });
+      });
+
+      function openLightbox(src) {
+        lightboxImage.src = src;
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightboxModal() {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+
+      function showPrevImage() {
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        lightboxImage.src = galleryImages[currentImageIndex];
+      }
+
+      function showNextImage() {
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+        lightboxImage.src = galleryImages[currentImageIndex];
+      }
+
+      closeLightbox.addEventListener('click', closeLightboxModal);
+      prevLightbox.addEventListener('click', showPrevImage);
+      nextLightbox.addEventListener('click', showNextImage);
+
+      // Close on background click
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightboxModal();
+        }
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('hidden')) {
+          if (e.key === 'Escape') {
+            closeLightboxModal();
+          } else if (e.key === 'ArrowLeft') {
+            showPrevImage();
+          } else if (e.key === 'ArrowRight') {
+            showNextImage();
+          }
+        }
+      });
+    }
+
+    // Google Maps initialization for contact page
+    const mapCanvas = document.getElementById('map-canvas');
+    if (mapCanvas && typeof google !== 'undefined') {
+      const locations = [[35.5152479, 23.6217727, "Viglia Beach Apartments", "+30 6978.11.53.49", "Metoxi Viglia, Kíssamos"]];
+
+      google.maps.event.addDomListener(window, 'load', function () {
+        const mapOptions = {
+          zoom: 12,
+          center: new google.maps.LatLng(35.515396, 23.621773),
+          styles: [
+            { featureType: "landscape", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 65 }] },
+            { featureType: "poi", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }, { lightness: 51 }] },
+            { featureType: "road.highway", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }] },
+            { featureType: "road.arterial", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 30 }] },
+            { featureType: "road.local", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 40 }] },
+            { featureType: "transit", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }] },
+            { featureType: "water", elementType: "labels", stylers: [{ visibility: "on" }, { color: "#000000" }, { weight: 0.29 }, { saturation: -100 }, { lightness: -13 }] },
+            { featureType: "water", elementType: "geometry", stylers: [{ hue: "#00b3ff" }, { saturation: -21 }, { lightness: -25 }] },
+            { featureType: "administrative.country", elementType: "geometry.stroke", stylers: [{ color: "#8693a1" }, { weight: 2.3 }, { lightness: -13 }, { gamma: 1.08 }] },
+            { featureType: "administrative.country", elementType: "labels.text.fill", stylers: [{ visibility: "on" }, { color: "#000000" }, { weight: 0.48 }] },
+            { featureType: "water", elementType: "labels.text.stroke", stylers: [{ visibility: "on" }, { color: "#ffffff" }, { weight: 2.6 }] },
+            { featureType: "road", elementType: "labels.text.fill", stylers: [{ visibility: "on" }, { color: "#000000" }, { lightness: 21 }] },
+            { featureType: "administrative.locality", elementType: "labels.text.fill", stylers: [{ visibility: "on" }, { color: "#000000" }, { lightness: -37 }, { gamma: 0.01 }] },
+            { featureType: "administrative.locality", elementType: "labels.text.stroke", stylers: [{ visibility: "on" }, { color: "#f5f0f5" }, { weight: 4.43 }] }
+          ]
+        };
+
+        const map = new google.maps.Map(mapCanvas, mapOptions);
+        const bounds = new google.maps.LatLngBounds();
+        const infoWindow = new google.maps.InfoWindow({ maxWidth: 200 });
+
+        locations.forEach(location => {
+          const position = new google.maps.LatLng(location[0], location[1]);
+          bounds.extend(position);
+
+          const marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: location[2],
+            mob: location[3],
+            address: location[4]
+          });
+
+          google.maps.event.addListener(marker, 'click', function () {
+            infoWindow.setContent(`<div class='map-title font-semibold'>${this.title}</div><div class='map-phone'>${this.mob}</div><div class='map-address'>${this.address}</div>`);
+            infoWindow.open(map, this);
+          });
+        });
+
+        const zoomListener = google.maps.event.addListener(map, 'idle', function () {
+          if (map.getZoom() > 16) map.setZoom(12);
+          google.maps.event.removeListener(zoomListener);
+        });
+      });
+    }
+  });
+
+  // Load Google Maps API
+  function loadGoogleMaps() {
+    if (!document.querySelector('script[src*="maps.googleapis.com"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE';
+      script.async = true;
+      script.defer = true;
+      document.head.appendChild(script);
+    }
+  }
+
+  // Materialize-style interactions
+  document.addEventListener('DOMContentLoaded', function () {
+    // Dropdown functionality
+    const dropdownTriggers = document.querySelectorAll('.dropdown-trigger');
+    const dropdowns = document.querySelectorAll('.dropdown-content');
+
+    dropdownTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const target = this.getAttribute('data-target');
+        const dropdown = document.getElementById(target);
+
+        if (dropdown) {
+          // Close other dropdowns
+          dropdowns.forEach(d => {
+            if (d !== dropdown) {
+              d.classList.add('hidden');
+            }
+          });
+
+          // Toggle current dropdown
+          dropdown.classList.toggle('hidden');
+        }
+      });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function () {
+      dropdowns.forEach(dropdown => {
+        dropdown.classList.add('hidden');
+      });
+    });
+
+    // NOTE: Mobile sidenav functionality is handled in header.html partial
+
+    // Collapsible functionality for mobile menu
+    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+    collapsibleHeaders.forEach(header => {
+      header.addEventListener('click', function () {
+        const body = this.nextElementSibling;
+        if (body) {
+          body.classList.toggle('hidden');
+          const icon = this.querySelector('.material-icons.right');
+          if (icon) {
+            icon.textContent = body.classList.contains('hidden') ? 'keyboard_arrow_down' : 'keyboard_arrow_up';
+          }
+        }
+      });
+    });
+  });
+
+  // Load Google Maps only on contact page
+  if (document.getElementById('map-canvas')) {
+    loadGoogleMaps();
+  }
+
+  // Room slideshow functionality
+  const roomSlides = document.querySelectorAll('#room-slideshow .group-item');
+  const prevRoomBtn = document.getElementById('prev-room-slide');
+  const nextRoomBtn = document.getElementById('next-room-slide');
+  let currentRoomSlide = 0;
+
+  if (roomSlides.length > 0) {
+    function showRoomSlide(index) {
+      roomSlides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.remove('opacity-0');
+          slide.classList.add('opacity-100');
+        } else {
+          slide.classList.remove('opacity-100');
+          slide.classList.add('opacity-0');
+        }
+      });
+    }
+
+    function nextRoomSlide() {
+      currentRoomSlide = (currentRoomSlide + 1) % roomSlides.length;
+      showRoomSlide(currentRoomSlide);
+    }
+
+    function prevRoomSlide() {
+      currentRoomSlide = (currentRoomSlide - 1 + roomSlides.length) % roomSlides.length;
+      showRoomSlide(currentRoomSlide);
+    }
+
+    // Auto-play room slideshow
+    setInterval(nextRoomSlide, 4000);
+
+    // Event listeners for room navigation
+    if (prevRoomBtn) prevRoomBtn.addEventListener('click', prevRoomSlide);
+    if (nextRoomBtn) nextRoomBtn.addEventListener('click', nextRoomSlide);
+  }
+
+  // Room reviews carousel functionality
+  const roomReviewDots = document.querySelectorAll('.room-review-dot');
+  const roomReviewsContainer = document.querySelector('#room-reviews-carousel .reviews-container');
+  let currentRoomReview = 0;
+
+  if (roomReviewDots.length > 0 && roomReviewsContainer) {
+    function showRoomReview(index) {
+      roomReviewsContainer.style.transform = `translateX(-${index * 100}%)`;
+      roomReviewDots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('bg-blue-600');
+          dot.classList.remove('bg-gray-300');
+        } else {
+          dot.classList.remove('bg-blue-600');
+          dot.classList.add('bg-gray-300');
+        }
+      });
+    }
+
+    roomReviewDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentRoomReview = index;
+        showRoomReview(currentRoomReview);
+      });
+    });
+
+    // Auto-play room reviews
+    setInterval(() => {
+      currentRoomReview = (currentRoomReview + 1) % roomReviewDots.length;
+      showRoomReview(currentRoomReview);
+    }, 7000);
+  }
+</script>

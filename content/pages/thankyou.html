@@ -1,0 +1,80 @@
+---
+layout: default
+seoTitle: Viglia Beach Apartments - Thank you
+title: thankyou
+permalink: thankyou
+config:
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+      class: slideshow-section
+   divs:
+      - div: 
+         theme:
+          class: frontpage-slideshow     
+        components:
+         - component: posts-list
+           data:
+            javascript-plugin: owl-carousel
+            javascript-plugin-data:
+                 items: 1
+                 loop: true
+                 lazyLoad: true
+                 autoplay: true
+                 margin: 10
+                 nav: true
+                 dots: true
+            wrapperDiv:
+             theme:
+                class: owl-carousel owl-theme
+                id: slideshow
+            groupFieldsElement: div
+            groupFieldsElement-data:
+             class: slideshow-item
+            content-type: slideshow
+            data-type: data-list
+            fields:
+              - field: group
+                class: group-item
+                fields:
+                 - field: src-image
+                   data:
+                     theme:
+                        class: slideshow-image
+                     image-hash: image
+                     image-path: /assets/images/slideshow/cropped/
+                     sizes: |
+                        100vw
+                     srcset:
+                      - set: 2000
+                      - set: 1200
+                      - set: 900
+                      - set: 600
+                 - field: group
+                   class: slideshow-title
+                   fields:
+                     - field: title
+                       data:
+                        class: title animated fadeInDown
+                     - field: subtitle
+ - section: 
+    data:
+      htmlelement: section
+    theme:
+       class: thankyou-section
+   divs:
+      - div:
+         theme:
+          class: thankyou-text
+        components:                
+         - component: field
+           data:
+            title: Thank you
+            content-type: strings   
+            fields:
+               - field: thankyou
+---
+
+
+{% include basic_components/page.html %}

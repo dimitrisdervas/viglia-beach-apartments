@@ -1,0 +1,11 @@
+baseURL = 'https://viglia.com/'
+languageCode = 'en-us'
+title = 'Viglia Beach Apartments'
+
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.112.0"
+
+[build]
+  writeStats = true

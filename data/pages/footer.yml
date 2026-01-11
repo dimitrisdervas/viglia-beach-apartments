@@ -1,0 +1,28 @@
+- section: 
+   data:
+    htmlelement: footer
+   theme:
+    class: section-footer
+  wrapperSection:
+   theme:
+    class: footer-wrapper
+  divs:
+   - div: 
+      theme:
+       class: contact-footer     
+     components:
+       - component: field
+         data:
+              content-type: contact
+              data-type: data-list
+              fields:
+                - field: phone
+                - field: email
+                - field: address
+   - div:
+      theme:
+       class: logo
+     components:
+       - component: logo
+         data:
+           text: Viglia Beach Apartments                    

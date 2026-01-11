@@ -1,0 +1,53 @@
+seasons:
+  - title: low
+    date: "01/05/26-15/05/26"
+  - title: mid
+    date: "16/05/26-15/06/26"
+  - title: high
+    date: "16/06/26-15/09/26"
+  - title: mid
+    date: "16/09/26-15/10/26"
+  - title: low
+    date: "16/10/26-31/10/26"
+
+prices:
+  Big-Apartment-Ground:
+    room_slug: big-apartment
+    display_name: "Big Apartment (Ground Floor)"
+    prices:
+      - price: '130€/night'
+        season: low
+      - price: '160€/night'
+        season: mid
+      - price: '200€/night'
+        season: high
+  Big-Apartment-Top:
+    room_slug: big-apartment
+    display_name: "Big Apartment (Top Floor)"
+    prices:
+      - price: '140€/night'
+        season: low
+      - price: '175€/night'
+        season: mid
+      - price: '220€/night'
+        season: high
+  Studio-Sea-View:
+    room_slug: studio-sea-view
+    display_name: "Studio Sea View"
+    prices:
+      - price: "100€/night"
+        season: low
+      - price: "130€/night"
+        season: mid
+      - price: "160€/night"
+        season: high
+  Studio:
+    room_slug: studio
+    display_name: "Studio"
+    prices:
+      - price: '95€/night'
+        season: low
+      - price: '125€/night'
+        season: mid
+      - price: '155€/night'
+        season: high

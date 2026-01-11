@@ -1,0 +1,156 @@
+{{ define "main" }}
+<div class="page useful-links">
+    <section class="useful-section container" style="padding-top: 3rem; padding-bottom: 4rem;">
+
+        <!-- Airlines Section -->
+        <div class="useful-category">
+            <div class="component-header">
+                <div class="component-title">Airlines</div>
+            </div>
+            <ul class="link-list">
+                {{ range .Site.Data.content.useful_links }}
+                {{ if eq .tag "airlines" }}
+                <li>
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Boats Section -->
+        <div class="useful-category">
+            <div class="component-header">
+                <div class="component-title">Boats</div>
+            </div>
+            <ul class="link-list">
+                {{ range .Site.Data.content.useful_links }}
+                {{ if eq .tag "boats" }}
+                <li>
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Airports Section -->
+        <div class="useful-category">
+            <div class="component-header">
+                <div class="component-title">Airports</div>
+            </div>
+            <ul class="link-list">
+                {{ range .Site.Data.content.useful_links }}
+                {{ if eq .tag "airport" }}
+                <li>
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Municipality Section -->
+        <div class="useful-category">
+            <div class="component-header">
+                <div class="component-title">Municipality</div>
+            </div>
+            <ul class="link-list">
+                {{ range .Site.Data.content.useful_links }}
+                {{ if eq .tag "municipality" }}
+                <li>
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Bus Services Section -->
+        <div class="useful-category">
+            <div class="component-header">
+                <div class="component-title">Bus Services</div>
+            </div>
+            <ul class="link-list">
+                {{ range .Site.Data.content.useful_links }}
+                {{ if eq .tag "bus" }}
+                <li>
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Weather Section -->
+        <div class="useful-category">
+            <div class="component-header">
+                <div class="component-title">Weather</div>
+            </div>
+            <ul class="link-list">
+                {{ range .Site.Data.content.useful_links }}
+                {{ if eq .tag "weather" }}
+                <li>
+                    <a href="{{ .url }}" target="_blank" rel="noopener">{{ .title }}</a>
+                </li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+    </section>
+</div>
+
+<style>
+    .page.useful-links {
+        padding-top: 64px;
+    }
+
+    .useful-category {
+        margin-bottom: 3rem;
+    }
+
+    .link-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .link-list li {
+        display: block;
+    }
+
+    .link-list li a {
+        display: inline-block;
+        padding: 12px 20px;
+        background: #fff;
+        border: 1px solid #e2e2e2;
+        border-radius: 4px;
+        color: #0898ff;
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .link-list li a:hover {
+        background: #f5f5f5;
+        color: #024b79;
+        border-color: #024b79;
+    }
+
+    @media (max-width: 767px) {
+        .link-list li {
+            width: 100%;
+        }
+
+        .link-list li a {
+            display: block;
+            width: 100%;
+        }
+    }
+</style>
+{{ end }}

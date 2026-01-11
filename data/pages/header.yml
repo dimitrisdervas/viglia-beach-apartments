@@ -1,0 +1,15 @@
+- section: 
+   data:
+    htmlelement: header
+  divs:
+   - div: 
+      theme:
+        class: menu
+     components:
+       - component: materialize/navbar
+         data:
+          javascript-plugin: materialize-dropdown
+          logo:
+           title: Viglia Beach Apartments
+          content-type: menu
+          data-type: data-list

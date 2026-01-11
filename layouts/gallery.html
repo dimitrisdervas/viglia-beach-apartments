@@ -1,0 +1,64 @@
+{{ define "main" }}
+<!-- Outside Photos Section -->
+<section class="photos-section py-20 bg-gray-50">
+  <div class="photos-strip max-w-7xl mx-auto px-4">
+    <div class="component-header text-center mb-12">
+      <div class="component-title text-4xl font-bold text-gray-800">OUTSIDE</div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
+      {{ range .Site.Data.content.gallery_booking }}
+      <div class="photo overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+        <img src="/images/viglia-booking/{{ .image }}" alt="{{ .title }}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+      </div>
+      {{ end }}
+      {{ range .Site.Data.content.gallery_outside2019 }}
+      <div class="photo overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+        <img src="/images/outside2019/{{ .image }}" alt="{{ .title }}" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Room Galleries Section -->
+<section class="rooms-section py-20 bg-white">
+  <div class="rooms max-w-7xl mx-auto px-4">
+    {{ range (where .Site.RegularPages ".Section" "rooms") }}
+    <div class="room-gallery mb-16">
+      <div class="room-title text-center mb-8">
+        <a href="{{ .RelPermalink }}" class="text-3xl font-bold text-blue-600 hover:text-blue-800 transition-colors duration-300">{{ .Title }}</a>
+      </div>
+      <div class="photos-strip">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {{ range first 6 .Params.images }}
+          <div class="gallery-image overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer group">
+            <img srcset="/images/all/2000px/{{ .image }} 2000w, /images/all/1200px/{{ .image }} 1200w, /images/all/900px/{{ .image }} 900w, /images/all/600px/{{ .image }} 600w"
+                 sizes="(max-width: 600px) 600px,(min-width: 900px) 900px,(min-width: 1200px) 1200px,(min-width: 1800px) 2000px"
+                 src="/images/all/1200px/{{ .image }}"
+                 alt="{{ .title }}"
+                 class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<!-- Lightbox/Modal for images -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 flex items-center justify-center">
+  <div class="relative max-w-4xl max-h-full p-4">
+    <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full object-contain">
+    <button id="close-lightbox" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 transition-colors duration-300">
+      &times;
+    </button>
+    <button id="prev-lightbox" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-gray-300 transition-colors duration-300">
+      &#10094;
+    </button>
+    <button id="next-lightbox" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-gray-300 transition-colors duration-300">
+      &#10095;
+    </button>
+  </div>
+</div>
+{{ end }}

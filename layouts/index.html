@@ -1,0 +1,224 @@
+{{ define "main" }}
+<div class="page welcome frontpage">
+  <!-- Slideshow Section -->
+  <section class="slideshow-section">
+    <div class="slideshow-container">
+      <div class="slideshow-slides">
+        {{ range .Site.Data.content.slideshow }}
+        <div class="slideshow-slide">
+          <img src="/images/slideshow/{{ .image }}" srcset="/images/slideshow/cropped/2000px/{{ .image }} 2000w,
+                       /images/slideshow/cropped/1200px/{{ .image }} 1200w,
+                       /images/slideshow/cropped/900px/{{ .image }} 900w,
+                       /images/slideshow/cropped/600px/{{ .image }} 600w" sizes="100vw" alt="{{ .title }}"
+            loading="lazy">
+        </div>
+        {{ end }}
+      </div>
+      <!-- Title overlay (shows on all slides) -->
+      <div class="slideshow-title">
+        <div class="title animated fadeInDown">Viglia Beach Apartments</div>
+        <div class="subtitle">Welcome to Crete</div>
+      </div>
+      <!-- Dots for visual indicator -->
+      <div class="slideshow-dots">
+        {{ range $index, $slide := .Site.Data.content.slideshow }}
+        <span></span>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="aboutus-section container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="aboutus-frontpage">
+      <h1 id="viglia-beach-apartments">Viglia Beach Apartments</h1>
+      <div class="text-content">
+        {{ .Site.Data.content.strings.about | markdownify }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards Section -->
+  <section class="awards-section container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <div class="component-header">
+      <div class="component-title"></div>
+    </div>
+    <div class="awards">
+      <div class="booking">
+        <a target="_blank" href="https://www.booking.com/hotel/gr/viglia-beach-apartments.el.html">
+          <img src="/images/awards/320px/booking-award-2017.png" alt="Booking.com Award">
+        </a>
+      </div>
+      <div class="sidebar-tripadvisor">
+        <a target="_blank"
+          href="https://www.tripadvisor.com/Hotel_Review-g656571-d644847-Reviews-Viglia_Beach_Apartments-Gramvousa_Chania_Prefecture_Crete.html">
+          <img src="/images/awards/320px/tripadvisor-2017.png" alt="TripAdvisor Certificate">
+        </a>
+      </div>
+      <div class="travel-myth">
+        <a target="_blank" href="http://www.travelmyth.com/Kissamos/Hotels">
+          <img src="/images/awards/320px/travelmyth_en.png" alt="TravelMyth Award">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rooms Section -->
+  <section class="rooms-section container" style="padding-top: 3rem; padding-bottom: 4rem;">
+    <div class="rooms section">
+      <div class="component-header">
+        <div class="component-title">Our Rooms</div>
+      </div>
+      {{ partial "rooms-grid" . }}
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section"
+    style="background-image: url('/images/reviews/900px/booking10.jpg'); margin-top: 2rem; margin-bottom: 4rem;">
+    <div class="reviews">
+      <div class="component-header-line">
+        <div class="component-title">People Reviews</div>
+      </div>
+      <div class="reviews-carousel">
+        <div class="reviews-slides">
+          {{ range .Site.Data.content.reviews }}
+          <div class="review">
+            <div class="review-text">{{ .text | markdownify }}</div>
+            <div class="name">{{ .name }}</div>
+            <div class="country">{{ .country }}</div>
+            <div class="site">{{ .site }}</div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section container" style="padding-top: 3rem; padding-bottom: 3rem;">
+    <div class="contact">
+      <div class="component-header">
+        <div class="component-title">Reservation</div>
+      </div>
+      <form id="reservation-form" method="post" netlify data-parsley-validate action="/thankyou"
+        netlify-honeypot="bot-field">
+        <div class="hidden">
+          <label>Don't fill this out if you're human: <input name="bot-field"></label>
+        </div>
+
+        <div class="input-field">
+          <input id="name" name="name" type="text" data-parsley-required="true" placeholder=" ">
+          <label for="name">Name</label>
+        </div>
+
+        <div class="input-field">
+          <input id="email" name="email" type="email" data-parsley-required="true" placeholder=" ">
+          <label for="email">Email</label>
+        </div>
+
+        <div class="input-field">
+          <input id="phone" name="phone" type="text" placeholder=" ">
+          <label for="phone">Phone</label>
+        </div>
+
+        <div class="flex flex-wrap md:flex-nowrap gap-4">
+          <div class="checkin flex-1">
+            <label for="checkin">Checkin</label>
+            <input type="date" name="checkin" id="checkin" data-parsley-required="true">
+          </div>
+          <div class="checkout flex-1">
+            <label for="checkout">Checkout</label>
+            <input type="date" name="checkout" id="checkout" data-parsley-required="true">
+          </div>
+        </div>
+
+        <div class="flex flex-wrap md:flex-nowrap gap-4">
+          <div class="input-field flex-1">
+            <select name="persons" id="persons" data-parsley-required="true">
+              <option value disabled selected>Persons</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </div>
+          <div class="input-field flex-1">
+            <select name="villa-type" id="villa" data-parsley-required="true">
+              <option value disabled selected>Choose Studio</option>
+              <option value="Studio">Studio</option>
+              <option value="Studio Sea View">Studio Sea View</option>
+              <option value="Family Apartment">Family Apartment</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="input-field">
+          <textarea name="message" id="textarea" placeholder=" " rows="3"></textarea>
+          <label for="textarea">Message</label>
+        </div>
+
+        <div class="recaptcha">
+          <div data-netlify-recaptcha></div>
+        </div>
+
+        <div class="button-submit">
+          <button class="submit-button waves-effect" type="submit">Ask Owner</button>
+        </div>
+      </form>
+
+      <div class="booking-button-wrapper">
+        <img src="/images/awards/booking.png" alt="Booking.com">
+        <div class="text">Check for availability and Book on Booking.com</div>
+        <a class="booking-button" href="https://www.booking.com/hotel/gr/viglia-beach-apartments.el.html">Check
+          availability</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Details Section -->
+  <section class="details-section container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <div class="details-content">
+      <div class="component-header">
+        <div class="component-title">Contact</div>
+      </div>
+      <div class="contact-details">
+        <div class="field phone">
+          <i class="material-icons">phone</i>
+          <span>+30 28220.23893</span>
+        </div>
+        <div class="field mobile">
+          <i class="material-icons">phonelink_ring</i>
+          <span>+30 6978.11.53.49</span>
+        </div>
+        <div class="field email">
+          <i class="material-icons">email</i>
+          <span>vigliahotel@gmail.com</span>
+        </div>
+        <div class="field address">
+          <i class="material-icons">room</i>
+          <span>Metoxi Viglia, Kíssamos, 73400, Greece</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="photos-section container" style="padding-top: 2rem; padding-bottom: 4rem;">
+    <div class="photos-strip">
+      <div class="component-header">
+        <div class="component-title">Gallery</div>
+      </div>
+      {{ partial "gallery" (dict "limit" 6) }}
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/gallery/" class="submit-button" style="display: inline-block; text-decoration: none;">View All
+          Photos</a>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

@@ -1,0 +1,166 @@
+{{ define "main" }}
+<div class="page contact">
+    <!-- Map Section -->
+    <section class="map-section">
+        <div id="map-canvas" class="map-canvas" style="height: 500px;"></div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-contact--section" style="padding: 3rem 1rem 4rem;">
+        <div class="container">
+            <div class="contact" style="max-width: 600px; margin: 0 auto;">
+                <div class="component-header">
+                    <div class="component-title">Contact Us</div>
+                </div>
+
+                <form id="reservation-form" method="post" netlify data-parsley-validate action="/thankyou/"
+                    netlify-honeypot="bot-field">
+                    <div class="hidden">
+                        <label>Don't fill this out if you're human: <input name="bot-field"></label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="name" name="name" type="text" data-parsley-required="true" placeholder=" ">
+                        <label for="name">Name</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="email" name="email" type="email" data-parsley-required="true" placeholder=" ">
+                        <label for="email">Email</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input id="phone" name="phone" type="text" placeholder=" ">
+                        <label for="phone">Phone</label>
+                    </div>
+
+                    <div class="input-field">
+                        <textarea name="message" id="textarea" placeholder=" " rows="4"></textarea>
+                        <label for="textarea">Message</label>
+                    </div>
+
+                    <div class="recaptcha">
+                        <div data-netlify-recaptcha></div>
+                    </div>
+
+                    <div class="button-submit">
+                        <button class="submit-button" type="submit">Ask Owner</button>
+                    </div>
+                </form>
+
+                <div class="contact-details" style="margin-top: 3rem;">
+                    <div class="field phone">
+                        <i class="material-icons">phone</i>
+                        <span>+30 28220.23893</span>
+                    </div>
+                    <div class="field mobile">
+                        <i class="material-icons">phonelink_ring</i>
+                        <span>+30 6978.11.53.49</span>
+                    </div>
+                    <div class="field email">
+                        <i class="material-icons">email</i>
+                        <span>vigliahotel@gmail.com</span>
+                    </div>
+                    <div class="field address">
+                        <i class="material-icons">room</i>
+                        <span>Metoxi Viglia, Kíssamos, 73400, Greece</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    .page.contact {
+        padding-top: 64px;
+    }
+
+    .map-canvas {
+        width: 100%;
+    }
+
+    .contact-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .contact-details .field {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        background: #f9f9f9;
+        border-radius: 4px;
+    }
+
+    .contact-details .field i {
+        color: #024b79;
+        font-size: 1.5rem;
+    }
+
+    .contact-details .field span {
+        color: #4a4a4a;
+        font-size: 0.95rem;
+    }
+</style>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMnz5pux1SPWE0DFlrXitKQO1S_8FnXbg"></script>
+<script>
+    (function () {
+        var locations = [
+            [35.5152479, 23.6217727, "Viglia Beach Apartments", "+30 6978.11.53.49", "Metoxi Viglia, Kíssamos"]
+        ];
+
+        function initContactMap() {
+            var mapCanvas = document.getElementById('map-canvas');
+            if (!mapCanvas || typeof google === 'undefined') return;
+
+            var mapOptions = {
+                zoom: 12,
+                center: new google.maps.LatLng(35.515396, 23.621773),
+                styles: [
+                    { featureType: "landscape", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 65 }] },
+                    { featureType: "poi", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }, { lightness: 51 }] },
+                    { featureType: "road.highway", elementType: "all", stylers: [{ visibility: "simplified" }, { saturation: -100 }] },
+                    { featureType: "road.arterial", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 30 }] },
+                    { featureType: "road.local", elementType: "all", stylers: [{ visibility: "on" }, { saturation: -100 }, { lightness: 40 }] },
+                    { featureType: "water", elementType: "geometry", stylers: [{ hue: "#00b3ff" }, { saturation: -21 }, { lightness: -25 }] }
+                ]
+            };
+
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var infoWindow = new google.maps.InfoWindow({ maxWidth: 200 });
+
+            for (var i = 0; i < locations.length; i++) {
+                var loc = locations[i];
+                var position = new google.maps.LatLng(loc[0], loc[1]);
+                var marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: loc[2]
+                });
+
+                (function (marker, loc) {
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infoWindow.setContent(
+                            "<div class='map-title'>" + loc[2] + "</div>" +
+                            "<div class='map-phone'>" + loc[3] + "</div>" +
+                            "<div class='map-address'>" + loc[4] + "</div>"
+                        );
+                        infoWindow.open(map, marker);
+                    });
+                })(marker, loc);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initContactMap);
+        } else {
+            initContactMap();
+        }
+    })();
+</script>
+{{ end }}

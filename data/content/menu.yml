@@ -1,0 +1,23 @@
+- name: Accomodation
+  submenu:
+   - name: Studio
+     url: /rooms/studio.html
+   - name: Studio Sea View
+     url: /rooms/studio-sea-view.html
+   - name: Big Apartment
+     url: /rooms/big-apartment.html
+   - name: Gallery
+     url: /gallery.html
+
+- name: Rates
+  url: /rates.html
+  
+- name: Contact Us/Map
+  url: /contact.html
+
+- name: Suggestions
+  submenu:
+   - name: Places to Visit
+     url: /suggestions.html
+   - name: Useful Links
+     url: /useful-links.html

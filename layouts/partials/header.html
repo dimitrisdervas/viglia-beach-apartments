@@ -1,0 +1,270 @@
+<header>
+  <div class="menu">
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo">Viglia Beach Apartments</a>
+          <a href="#" class="sidenav-trigger" id="menu-toggle" aria-label="Open menu">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul id="nav-mobile">
+            <li class="nav-item has-dropdown">
+              <a href="#!" class="dropdown-trigger">
+                Accommodation
+                <i class="material-icons right">keyboard_arrow_down</i>
+              </a>
+              <ul class="dropdown-content">
+                <li><a href="/rooms/studio/">Studio</a></li>
+                <li><a href="/rooms/studio-sea-view/">Studio Sea View</a></li>
+                <li><a href="/rooms/big-apartment/">Big Apartment</a></li>
+                <li><a href="/gallery/">Gallery</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="/rates/">Rates</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact/">Contact Us/Map</a>
+            </li>
+            <li class="nav-item has-dropdown">
+              <a href="#!" class="dropdown-trigger">
+                Suggestions
+                <i class="material-icons right">keyboard_arrow_down</i>
+              </a>
+              <ul class="dropdown-content">
+                <li><a href="/suggestions/">Places to Visit</a></li>
+                <li><a href="/useful-links/">Useful Links</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Mobile Side Navigation -->
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="/" class="brand-logo">Viglia Beach Apartments</a></li>
+      <li><a href="/rooms/studio/">Studio</a></li>
+      <li><a href="/rooms/studio-sea-view/">Studio Sea View</a></li>
+      <li><a href="/rooms/big-apartment/">Big Apartment</a></li>
+      <li><a href="/gallery/">Gallery</a></li>
+      <li><a href="/rates/">Rates</a></li>
+      <li><a href="/contact/">Contact Us/Map</a></li>
+      <li><a href="/suggestions/">Places to Visit</a></li>
+      <li><a href="/useful-links/">Useful Links</a></li>
+    </ul>
+
+    <div id="sidenav-overlay"></div>
+  </div>
+</header>
+
+<style>
+  /* CRITICAL: Hide desktop nav on mobile, show hamburger */
+  @media (max-width: 991px) {
+    #nav-mobile {
+      display: none !important;
+    }
+
+    .sidenav-trigger {
+      display: block !important;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .sidenav-trigger {
+      display: none !important;
+    }
+
+    #nav-mobile {
+      display: flex !important;
+    }
+  }
+
+  /* Dropdown positioning - nav-item needs position relative */
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-item.has-dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item.has-dropdown:hover .dropdown-content,
+  .nav-item.has-dropdown.open .dropdown-content {
+    display: block;
+  }
+
+  .dropdown-content li {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .dropdown-content li a {
+    display: block;
+    padding: 14px 16px;
+    color: #024b79;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .dropdown-content li a:hover {
+    background: #f5f5f5;
+    color: #e7ad44;
+  }
+
+  /* Sidenav overlay */
+  #sidenav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  #sidenav-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Sidenav */
+  .sidenav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidenav.active {
+    transform: translateX(0);
+  }
+
+  .sidenav li {
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .sidenav li a.brand-logo {
+    display: block;
+    padding: 20px 16px;
+    background: #024b79;
+    color: #fff;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+  }
+
+  .sidenav li a:not(.brand-logo) {
+    display: block;
+    padding: 16px 20px;
+    color: #4a4a4a;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .sidenav li a:not(.brand-logo):hover {
+    background: #f8f8f8;
+    color: #024b79;
+  }
+</style>
+
+<script>
+  (function () {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var menuToggle = document.getElementById('menu-toggle');
+      var sidenav = document.getElementById('mobile-demo');
+      var overlay = document.getElementById('sidenav-overlay');
+
+      // Open mobile menu
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (sidenav) sidenav.classList.add('active');
+          if (overlay) overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+
+      // Close mobile menu on overlay click
+      if (overlay) {
+        overlay.addEventListener('click', function () {
+          if (sidenav) sidenav.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+
+      // Close mobile menu when clicking a link
+      if (sidenav) {
+        var links = sidenav.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+          links[i].addEventListener('click', function () {
+            sidenav.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        }
+      }
+
+      // Desktop dropdown - click to toggle
+      var dropdownTriggers = document.querySelectorAll('.has-dropdown > .dropdown-trigger');
+      for (var j = 0; j < dropdownTriggers.length; j++) {
+        dropdownTriggers[j].addEventListener('click', function (e) {
+          e.preventDefault();
+          var parent = this.parentElement;
+
+          // Close all other dropdowns
+          var allDropdowns = document.querySelectorAll('.has-dropdown');
+          for (var k = 0; k < allDropdowns.length; k++) {
+            if (allDropdowns[k] !== parent) {
+              allDropdowns[k].classList.remove('open');
+            }
+          }
+
+          // Toggle this one
+          parent.classList.toggle('open');
+        });
+      }
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!e.target.closest('.has-dropdown')) {
+          var openDropdowns = document.querySelectorAll('.has-dropdown.open');
+          for (var l = 0; l < openDropdowns.length; l++) {
+            openDropdowns[l].classList.remove('open');
+          }
+        }
+      });
+    });
+  })();
+</script>

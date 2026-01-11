@@ -1,0 +1,162 @@
+{{ define "main" }}
+<div class="page rates-page">
+  <!-- Rates Section -->
+  <section class="rates-section container" style="margin-top: 2rem; margin-bottom: 3rem;">
+    <div class="component-header">
+      <div class="component-title">Rates</div>
+    </div>
+
+    <div class="seasons">
+      {{ range $index, $season := .Site.Data.content.rates.seasons }}
+      <div class="season-block" style="margin-bottom: 40px;">
+        <div class="header" style="display: flex; flex-wrap: wrap; border: 1px solid #f5f5f5; background: #f5f5f5;">
+          <div class="date"
+            style="padding: 15px; font-size: 1.25rem; font-family: 'Merriweather', serif; background: #464646; color: #fff; font-weight: bold;">
+            {{ $season.date }}
+          </div>
+          <div class="season-name" style="padding: 15px; font-weight: bold; text-transform: capitalize;">
+            {{ $season.title }} Season
+          </div>
+        </div>
+
+        <div class="content" style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+          <!-- Big Apartment Ground -->
+          <div class="room"
+            style="flex: 1; min-width: 200px; border-left: 1px solid #f5f5f5; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #ddd;">
+            <div class="room-title">
+              <a href="/rooms/big-apartment/"
+                style="padding: 5px 25px; font-size: 20px; border-bottom: 1px solid #ddd; color: #949494; display: flex; transition: all 0.3s;">
+                Big Apartment Ground
+              </a>
+            </div>
+            <div class="price"
+              style="font-size: 30px; font-weight: bold; font-family: 'Merriweather', serif; color: #e7ad44; line-height: 2; background: #fff; padding: 5px 25px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+              {{ index (index $.Site.Data.content.rates.prices "Big-Apartment-Ground") $index "price" }}
+              <a class="book" href="/rooms/big-apartment/#reservation"
+                style="font-size: 14px; font-weight: normal; font-family: 'Roboto', sans-serif; color: #eaeaea; display: flex; align-items: center;">
+                Book <i class="material-icons" style="font-size: 18px; margin-left: 4px;">send</i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Big Apartment Top -->
+          <div class="room"
+            style="flex: 1; min-width: 200px; border-left: 1px solid #f5f5f5; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #ddd;">
+            <div class="room-title">
+              <a href="/rooms/big-apartment/"
+                style="padding: 5px 25px; font-size: 20px; border-bottom: 1px solid #ddd; color: #949494; display: flex; transition: all 0.3s;">
+                Big Apartment Top
+              </a>
+            </div>
+            <div class="price"
+              style="font-size: 30px; font-weight: bold; font-family: 'Merriweather', serif; color: #e7ad44; line-height: 2; background: #fff; padding: 5px 25px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+              {{ index (index $.Site.Data.content.rates.prices "Big-Apartment-Top") $index "price" }}
+              <a class="book" href="/rooms/big-apartment/#reservation"
+                style="font-size: 14px; font-weight: normal; font-family: 'Roboto', sans-serif; color: #eaeaea; display: flex; align-items: center;">
+                Book <i class="material-icons" style="font-size: 18px; margin-left: 4px;">send</i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Studio Sea View -->
+          <div class="room"
+            style="flex: 1; min-width: 200px; border-left: 1px solid #f5f5f5; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #ddd;">
+            <div class="room-title">
+              <a href="/rooms/studio-sea-view/"
+                style="padding: 5px 25px; font-size: 20px; border-bottom: 1px solid #ddd; color: #949494; display: flex; transition: all 0.3s;">
+                Studio Sea View
+              </a>
+            </div>
+            <div class="price"
+              style="font-size: 30px; font-weight: bold; font-family: 'Merriweather', serif; color: #e7ad44; line-height: 2; background: #fff; padding: 5px 25px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+              {{ index (index $.Site.Data.content.rates.prices "Studio-Sea-View") $index "price" }}
+              <a class="book" href="/rooms/studio-sea-view/#reservation"
+                style="font-size: 14px; font-weight: normal; font-family: 'Roboto', sans-serif; color: #eaeaea; display: flex; align-items: center;">
+                Book <i class="material-icons" style="font-size: 18px; margin-left: 4px;">send</i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Studio -->
+          <div class="room"
+            style="flex: 1; min-width: 200px; border-left: 1px solid #f5f5f5; border-right: 1px solid #f5f5f5; border-bottom: 1px solid #ddd;">
+            <div class="room-title">
+              <a href="/rooms/studio/"
+                style="padding: 5px 25px; font-size: 20px; border-bottom: 1px solid #ddd; color: #949494; display: flex; transition: all 0.3s;">
+                Studio
+              </a>
+            </div>
+            <div class="price"
+              style="font-size: 30px; font-weight: bold; font-family: 'Merriweather', serif; color: #e7ad44; line-height: 2; background: #fff; padding: 5px 25px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+              {{ index (index $.Site.Data.content.rates.prices "Studio") $index "price" }}
+              <a class="book" href="/rooms/studio/#reservation"
+                style="font-size: 14px; font-weight: normal; font-family: 'Roboto', sans-serif; color: #eaeaea; display: flex; align-items: center;">
+                Book <i class="material-icons" style="font-size: 18px; margin-left: 4px;">send</i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+    <!-- Additional Information -->
+    <div class="info-section" style="background: #fdfdfd; border: 1px solid #e6e6e6; padding: 30px; margin-top: 40px;">
+      <h2 style="font-size: 24px; font-weight: bold; color: #4a4a4a; margin-bottom: 20px; text-align: center;">Important
+        Information</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+        <div style="flex: 1; min-width: 280px;">
+          <h3 style="font-size: 18px; font-weight: bold; color: #024b79; margin-bottom: 15px;">Pricing Details</h3>
+          <ul style="color: #8a8a8a; line-height: 2;">
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> All prices are per night</li>
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> Minimum stay: 3 nights (high season), 2 nights
+              (other seasons)</li>
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> Prices include all taxes</li>
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> Free Wi-Fi included</li>
+          </ul>
+        </div>
+        <div style="flex: 1; min-width: 280px;">
+          <h3 style="font-size: 18px; font-weight: bold; color: #024b79; margin-bottom: 15px;">Payment & Cancellation
+          </h3>
+          <ul style="color: #8a8a8a; line-height: 2;">
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> 30% deposit required to confirm booking</li>
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> Free cancellation up to 30 days before arrival</li>
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> Balance due upon arrival</li>
+            <li style="display: flex; align-items: flex-start;"><span
+                style="color: #589442; margin-right: 8px;">✓</span> We accept cash, bank transfer, and credit cards</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .room-title a:hover {
+    color: #e7ad44;
+    background: #464646;
+  }
+
+  .price:hover .book {
+    color: #323232;
+  }
+
+  @media (max-width: 767px) {
+    .content {
+      flex-direction: column;
+    }
+
+    .room {
+      border-left: 1px solid #f5f5f5 !important;
+      border-right: 1px solid #f5f5f5 !important;
+    }
+  }
+</style>
+{{ end }}
